@@ -4,8 +4,6 @@
 
 ## Live Demo
 
-[查看網站](https://sshen714.github.io/web-programming-course/)
-
 ## 練習內容
 
 ### My Favorite Planet

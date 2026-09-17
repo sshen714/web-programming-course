@@ -19,7 +19,7 @@
 - 縮寫與提示文字：`abbr`、`acronym`
 - 行內 CSS 樣式：`style`
 
-[查看練習頁面](https://sshen714.github.io/web-programming-course/1.html)
+[查看1.html頁面](https://sshen714.github.io/web-programming-course/1.html)
 
 ## 專案結構
 

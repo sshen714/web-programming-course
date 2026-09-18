@@ -4,7 +4,7 @@
 
 ## Website
 
-- [進入 Web Programming Course](https://sshen714.github.io/web-programming-course/)
+- [進入 Web Programming Course](https://sshen714.github.io/web-programming-course/index.html)
 
 ## Repository Structure
 

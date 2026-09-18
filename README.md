@@ -11,6 +11,7 @@
 ```text
 web-programming-course/
 ├── index.html   # 所有作業的入口網頁
-├── 1.html       # HW01: My Favorite Planet
+├── week1/
+│   └── 1.html   # HW01: My Favorite Planet
 └── README.md    # 專案說明
 ```

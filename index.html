@@ -116,6 +116,16 @@
             font-weight: bold;
         }
 
+        .empty-message {
+            margin: 0;
+            padding: 28px;
+            color: #64748b;
+            text-align: center;
+            background: #ffffff;
+            border: 1px dashed #b8c4d0;
+            border-radius: 12px;
+        }
+
         footer {
             padding: 24px;
             color: #64748b;
@@ -148,19 +158,69 @@
                 <p>點選作業卡片即可查看網頁內容。</p>
             </div>
 
-            <div class="homework-list">
-                <a class="homework-card" href="./week1/1.html">
-                    <span class="homework-number">HW01</span>
-                    <h3>My Favorite Planet</h3>
-                    <p>練習 HTML 標題、段落、文字格式、上下標與縮寫標籤。</p>
-                    <span class="view-link">查看作業 &rarr;</span>
-                </a>
-            </div>
+            <div class="homework-list" id="homework-list"></div>
+
+            <noscript>
+                <p class="empty-message">請啟用 JavaScript 以查看作業清單。</p>
+            </noscript>
         </section>
     </main>
 
     <footer>
         <p>sshen714 &middot; Web Programming Course</p>
     </footer>
+
+    <script>
+        // 之後新增作業時，只要在這個陣列中加入一筆資料。
+        const homeworkData = [
+            {
+                number: "HW01",
+                title: "My Favorite Planet",
+                description: "練習 HTML 標題、段落、文字格式、上下標與縮寫標籤。",
+                link: "./week1/1.html"
+            },
+        ];
+
+        const homeworkList = document.querySelector("#homework-list");
+
+        function createHomeworkCard(homework) {
+            const card = document.createElement("a");
+            card.className = "homework-card";
+            card.href = homework.link;
+            card.setAttribute("aria-label", `查看 ${homework.number}：${homework.title}`);
+
+            const number = document.createElement("span");
+            number.className = "homework-number";
+            number.textContent = homework.number;
+
+            const title = document.createElement("h3");
+            title.textContent = homework.title;
+
+            const description = document.createElement("p");
+            description.textContent = homework.description;
+
+            const viewLink = document.createElement("span");
+            viewLink.className = "view-link";
+            viewLink.innerHTML = "查看作業 &rarr;";
+
+            card.append(number, title, description, viewLink);
+            return card;
+        }
+
+        if (homeworkData.length === 0) {
+            const emptyMessage = document.createElement("p");
+            emptyMessage.className = "empty-message";
+            emptyMessage.textContent = "目前尚無作業。";
+            homeworkList.append(emptyMessage);
+        } else {
+            const homeworkCards = document.createDocumentFragment();
+
+            homeworkData.forEach((homework) => {
+                homeworkCards.append(createHomeworkCard(homework));
+            });
+
+            homeworkList.append(homeworkCards);
+        }
+    </script>
 </body>
 </html>

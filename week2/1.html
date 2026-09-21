@@ -1,33 +1,136 @@
 <!DOCTYPE html>
-<html>
 <head>
-    <title>Demo of link</title>
     <style>
-    
-        a:link{
-        color:yellow;
-        background-color: black;
-        } 
-
-        a:visited{
-        color:grey;
-        } 
-
-        a:active{
-        color:pink;
-        background-color: yellow;
-        }
-        
-        a:hover{
-            color: rgb(0, 204, 255);
+        * {
+            box-sizing: border-box;
         }
 
+        body {
+            margin: 0;
+            color: #292323;
+            background-color: #f8f5f2;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        main {
+            width: min(100% - 40px, 1050px);
+            margin: 0 auto;
+            padding: 36px 0 64px;
+        }
+
+        h1,
+        h2,
+        strong {
+            color: #8b2734;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 2.25rem;
+        }
+
+        .tagline {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+        }
+
+        .event-time {
+            line-height: 1.5;
+        }
+
+        .event-image {
+            display: block;
+            width: min(100%, 320px);
+            height: 230px;
+            margin: 18px 0 24px;
+            object-fit: cover;
+        }
+
+        section {
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            padding: 8px 12px;
+            background-color: #ead8cd;
+            font-size: 1.55rem;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        del {
+            color: #6b6262;
+        }
+
+        ins {
+            color: #276749;
+            text-decoration-thickness: 2px;
+        }
+
+        a {
+            color: #3b398f;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: #8b2734;
+        }
+
+        address {
+            line-height: 1.45;
+        }
     </style>
-    
 </head>
 <body>
-    <h1>Demo of link:</h1>  
-    <a href="https://www.w3schools.com">Visit W3Schools </a>
+    <main>
+        <h1>JAZZ NIGHT 2026</h1>
 
+        <p class="tagline"><em>Live Music &amp; Dance</em></p>
+
+        <p class="event-time">
+            <strong>Saturday, October 10, 2026</strong><br>
+            <time datetime="2026-10-10T19:30">7:30 PM</time> &ndash;
+            <time datetime="2026-10-10T22:30">10:30 PM</time>
+        </p>
+
+        <img class="event-image" src="./1.png" alt="Jazz Night event image">
+
+        <section>
+            <h2>About the Event</h2>
+            <p>Join us for an evening of <strong>live jazz, dancing, and good music.</strong></p>
+
+            <p>
+                Ticket: <del>$30</del><br>
+                <strong>Special Price: $20</strong>
+            </p>
+
+            <p>
+                We originally planned to start at
+                <del><time datetime="2026-10-10T20:00">8:00 PM</time></del>
+                <ins><time datetime="2026-10-10T19:30">7:30 PM</time></ins>.
+            </p>
+        </section>
+
+        <section>
+            <h2>More Information</h2>
+            <p>
+                <a href="https://www.example.com">Visit our website</a><br>
+                <a href="mailto:jazznight@example.com">Email us</a><br>
+                <a href="tel:+886212345678">Call us</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <address>
+                Jazz Night Taipei<br>
+                123 Music Street, Taipei<br>
+                <a href="mailto:jazznight@example.com">jazznight@example.com</a>
+            </address>
+        </section>
+    </main>
 </body>
 </html>

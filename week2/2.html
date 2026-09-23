@@ -1,49 +1,296 @@
 <!DOCTYPE html>
-<style>
-    
-    div {
-        width:33%;
-        float:left;
-    }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Midnight Blues jazz night event information">
+    <title>Midnight Blues Jazz Night</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .green{
-        
-        background-color: rgb(30, 252, 5);
-        opacity: 0.7;
-        
-    }
+        body {
+            margin: 0;
+            color: #f7efe4;
+            background: #080b0d;
+            font-family: Georgia, "Times New Roman", serif;
+        }
 
-    .blue{
-        background-color: rgb(55, 71, 252);
-        opacity: 0.7;
-    }
+        .page {
+            width: min(1120px, calc(100% - 32px));
+            margin: 28px auto;
+            background: #111719;
+            border: 1px solid #3c292a;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.55);
+        }
 
-    .yellow{
-        background-color: yellow;
-        opacity: 0.7;
-    }
+        .event-header {
+            padding: 42px 24px;
+            text-align: center;
+            background: #a8293d;
+        }
 
+        .event-header h1 {
+            margin: 0 0 14px;
+            font-size: clamp(2.1rem, 6vw, 3.6rem);
+            letter-spacing: 0.04em;
+        }
 
-</style>
+        .event-header p {
+            margin: 8px 0;
+        }
 
-<html>
+        .tagline {
+            font-style: italic;
+        }
 
-    <div class="green">
-    <h2>London</h2>
-    <p>London is the capital city of England.</p>
-    <p>London has over 9 million inhabitants.</p>
+        .event-date {
+            font-weight: bold;
+        }
+
+        .hero {
+            padding: 28px 28px 20px;
+            text-align: center;
+        }
+
+        .hero a {
+            display: inline-block;
+        }
+
+        .hero img {
+            display: block;
+            width: min(100%, 680px);
+            height: auto;
+            margin: 0 auto;
+            border: 1px solid #78404a;
+        }
+
+        .hero p {
+            margin: 10px 0 0;
+            color: #d8c7b4;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+        }
+
+        .content-card {
+            min-height: 330px;
+            padding: 34px;
+        }
+
+        .light-card {
+            color: #38292a;
+            background: #f4ead4;
+        }
+
+        .dark-card {
+            color: #f7efe4;
+            background: #26383c;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            color: #9e2d3c;
+            font-size: 1.8rem;
+        }
+
+        .dark-card h2 {
+            color: #f0d3a2;
+        }
+
+        p {
+            line-height: 1.65;
+        }
+
+        .program-list,
+        .highlight-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .program-list li {
+            display: flex;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        .program-list time {
+            min-width: 82px;
+            color: #9e2d3c;
+            font-weight: bold;
+        }
+
+        .highlight-list li {
+            margin-bottom: 18px;
+            line-height: 1.45;
+        }
+
+        .highlight-list strong {
+            display: block;
+            color: #f0d3a2;
+        }
+
+        del {
+            color: #8a7676;
+        }
+
+        ins {
+            color: #9e2d3c;
+            font-weight: bold;
+            text-decoration-thickness: 2px;
+        }
+
+        .dark-card ins {
+            color: #f0d3a2;
+        }
+
+        .light-card a {
+            color: #8b2734;
+        }
+
+        a {
+            color: #f2c6ce;
+            text-underline-offset: 3px;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: #ffffff;
+        }
+
+        .ticket-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .contact {
+            padding: 28px 24px;
+            text-align: center;
+            background: #a8293d;
+        }
+
+        .contact h2 {
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .contact address {
+            line-height: 1.55;
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                width: 100%;
+                margin: 0;
+                border: 0;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card {
+                min-height: 0;
+                padding: 28px 22px;
+            }
+
+            .hero {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="event-header">
+            <h1>MIDNIGHT BLUES</h1>
+            <p class="tagline">A Night of Jazz, Rhythm &amp; Dance</p>
+            <p class="event-date">
+                <time datetime="2026-10-10">Saturday, October 10, 2026</time><br>
+                <time datetime="2026-10-10T19:30">7:30 PM</time> &ndash;
+                <time datetime="2026-10-10T22:30">10:30 PM</time> &middot; Taipei
+            </p>
+        </header>
+
+        <figure class="hero">
+            <a href="https://www.example.com/" aria-label="Visit the Midnight Blues event website">
+                <img src="./midnight-blues.png" alt="Saxophone, upright bass, and microphone in a midnight jazz club">
+            </a>
+            <figcaption><p>Click the image to visit the event website.</p></figcaption>
+        </figure>
+
+        <div class="content-grid">
+            <div class="content-card light-card">
+                <h2>About the Night</h2>
+                <p>
+                    Welcome to <strong>Midnight Blue</strong>, a night inspired by classic
+                    jazz clubs and social dancing.
+                </p>
+                <p>
+                    Enjoy live music, meet new people, and spend the evening dancing to
+                    <em>swing, jazz, and rhythm &amp; blues.</em>
+                </p>
+                <p>Good music. Good people. One unforgettable night.</p>
+            </div>
+
+            <div class="content-card dark-card">
+                <h2>Night Highlights</h2>
+                <ul class="highlight-list">
+                    <li><strong>LIVE BAND</strong>The Blue Notes Quartet</li>
+                    <li><strong>SOCIAL DANCE</strong>An open dance floor for everyone.</li>
+                    <li><strong>DRESS UP</strong>Vintage style is encouraged, but not required.</li>
+                </ul>
+                <p>Music starts at <time datetime="2026-10-10T20:00">8:00 PM</time>.</p>
+            </div>
+
+            <div class="content-card light-card">
+                <h2>Tonight&rsquo;s Program</h2>
+                <ul class="program-list">
+                    <li><time datetime="2026-10-10T19:30">7:30 PM</time> Doors Open</li>
+                    <li><time datetime="2026-10-10T20:00">8:00 PM</time> Live Jazz Set</li>
+                    <li><time datetime="2026-10-10T21:00">9:00 PM</time> Social Dance</li>
+                    <li><time datetime="2026-10-10T22:00">10:00 PM</time> Rhythm &amp; Blues Jam</li>
+                </ul>
+
+                <p>
+                    <strong>Schedule Update:</strong><br>
+                    <del>Doors close at 8:00 PM.</del><br>
+                    <ins>Doors now open at 7:30 PM.</ins>
+                </p>
+            </div>
+
+            <div class="content-card dark-card">
+                <h2>Tickets</h2>
+                <p>
+                    Early Bird: <del>NT$800</del><br>
+                    <ins>Special Price: NT$600</ins>
+                </p>
+                <p>Your ticket includes:<br>Live music + Social dance + Welcome drink</p>
+                <p>Only <strong>80 tickets</strong> are available.</p>
+                <strong>
+                    <a class="ticket-link" href="mailto:midnightblue@example.com?subject=Ticket%20Reservation">Reserve Your Ticket</a>
+                </strong>
+            </div>
+        </div>
+
+        <footer class="contact">
+            <h2>Contact Us</h2>
+            <address>
+                Midnight Blue Jazz Club<br>
+                88 Blue Note Lane, Taipei<br>
+                <a href="mailto:midnightblue@example.com">midnightblue@example.com</a>
+                &nbsp;|&nbsp;
+                <a href="tel:+886212345678">+886-2-1234-5678</a>
+            </address>
+        </footer>
     </div>
-
-    <div class="blue">
-    <h2>Oslo</h2>
-    <p>Oslo is the capital city of Norway.</p>
-    <p>Oslo has over 700,000 inhabitants.</p>
-    </div>
-
-    <div class="yellow">
-    <h2>Rome</h2>
-    <p>Rome is the capital city of Italy.</p>
-    <p>Rome has over 4 million inhabitants.</p>
-    </div>
-
+</body>
 </html>

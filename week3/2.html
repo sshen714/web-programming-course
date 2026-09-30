@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: #1f2937;
+            background-color: #f4f7f4;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        header {
+            padding: 40px 20px 24px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+        }
+
+        nav {
+            background-color: #159447;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 16px 24px;
+            color: white;
+            background-color: #159447;
+            text-decoration-line: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: white;
+            text-underline-offset: 5px;
+            transition: background-color 0.15s ease;
+        }
+
+        /* Mouse moves over the item */
+        nav a:hover,
+        nav a:focus-visible {
+            background-color: #d97706;
+        }
+
+        /* Mouse clicks the item */
+        nav a:active {
+            background-color: #334155;
+        }
+
+        main {
+            width: min(900px, calc(100% - 40px));
+            margin: 36px auto;
+        }
+
+        .demo-content {
+            padding: 28px;
+            background-color: white;
+            border: 1px solid #d7e2da;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 620px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Navigation Bar</h1>
+        <p>Move the mouse over an item, then click it to see the color change.</p>
+    </header>
+
+    <nav aria-label="Main navigation">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="demo-content" id="home">
+            <h2>Home</h2>
+            <p>This navigation bar was created with an unordered list.</p>
+        </div>
+    </main>
+</body>
+</html>

@@ -62,8 +62,25 @@
     .gallery { background: #eaece5; }
     .gallery-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
     figure { margin: 0; }
-    .gallery img { width: 100%; height: 340px; object-fit: cover; }
+    .gallery-image { overflow: hidden; border-radius: 4px; }
+    .gallery img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      transition: transform .45s ease, filter .45s ease;
+    }
     figcaption { margin-top: 15px; color: #575e54; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .gallery figcaption { transition: color .3s ease, transform .3s ease; }
+    @media (hover: hover) {
+      .gallery figure:hover img {
+        transform: scale(1.06);
+        filter: grayscale(100%);
+      }
+      .gallery figure:hover figcaption {
+        color: #956347;
+        transform: translateX(4px);
+      }
+    }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 32px; }
     .footer-inner p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
     .footer-inner a { text-underline-offset: 3px; }
@@ -103,6 +120,8 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      .gallery img, .gallery figcaption { transition: none; }
+      .gallery figure:hover img, .gallery figure:hover figcaption { transform: none; }
     }
   </style>
 </head>
@@ -174,11 +193,15 @@
         <h2 id="gallery-title">Little moments. Lasting impressions.</h2>
         <div class="gallery-grid">
           <figure>
+            <div class="gallery-image">
             <img src="https://images.unsplash.com/photo-1681419972368-c7d8d8184f2c?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Tokyo's skyline and Tokyo Tower in warm afternoon light" loading="lazy" width="1200" height="800">
+            </div>
             <figcaption>The city, from a different perspective</figcaption>
           </figure>
           <figure>
+            <div class="gallery-image">
             <img src="https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Vehicles and illuminated signs on a Tokyo street at night" loading="lazy" width="1000" height="800">
+            </div>
             <figcaption>After dark, a different kind of light</figcaption>
           </figure>
         </div>

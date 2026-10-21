@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tokyo — A City of Contrasts</title>
+  <style>
+    
+    :root {
+      --paper: #f8f7f3;
+      --ink: #242522;
+      --muted: #686a65;
+      --line: #dcdcd4;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Arial, Helvetica, sans-serif; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(100% - 80px, 1080px); margin-inline: auto; }
+    .eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 2px; line-height: 1.6; text-transform: uppercase; }
+    h1, h2, h3, blockquote, .logo { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+    a:focus-visible { outline: 3px solid #a65c42; outline-offset: 6px; }
+    .skip-link { position: absolute; top: -80px; left: 16px; z-index: 10; padding: 12px; background: white; }
+    .skip-link:focus { top: 12px; }
+
+    /* Header */
+    .site-header { background: var(--paper); }
+    .header-inner { min-height: 92px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .logo { text-decoration: none; font-size: 29px; font-weight: 700; letter-spacing: -1.5px; }
+    .navigation { display: flex; flex-wrap: wrap; gap: 30px; }
+    .navigation a { padding-block: 8px; text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; }
+    .navigation a:hover { text-decoration: underline; text-underline-offset: 7px; }
+
+    /* Full-width photo with a dark overlay for readable text */
+    .hero { position: relative; min-height: 610px; display: flex; align-items: center; isolation: isolate; background: #202c32; color: #fff; }
+    .hero-image { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 57%; }
+    .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8, 16, 23, .80), rgba(8, 16, 23, .40) 60%, rgba(8, 16, 23, .22)); }
+    .hero-content { padding-block: 75px 80px; }
+    .hero .eyebrow { color: #f1f0ec; }
+    h1 { margin: 34px 0 30px; font-size: clamp(66px, 8.4vw, 112px); line-height: 1.04; letter-spacing: -4.5px; }
+    .hero-rule { display: block; width: 52px; height: 2px; margin-bottom: 25px; background: #dddcd5; }
+    .hero-description { max-width: 440px; margin: 0; color: #eeefec; font-size: 16px; line-height: 1.9; }
+
+    /* Discover section, matching the reference's editorial two-column layout */
+    .section { padding-block: 88px; }
+    .section-label { color: var(--muted); }
+    h2 { margin: 19px 0 42px; font-size: clamp(32px, 4vw, 47px); line-height: 1.17; letter-spacing: -1.6px; }
+    .discover-grid { display: grid; grid-template-columns: 1.18fr 1fr; gap: 64px; align-items: center; }
+    .discover-copy .eyebrow { margin-bottom: 23px; }
+    .body-copy { color: #565953; font-size: 15px; line-height: 1.95; }
+    .body-copy p { margin: 0 0 19px; }
+    blockquote { margin: 22px 0 0; color: #5d6058; font-size: 18px; line-height: 1.65; font-style: italic; }
+    .discover-photo { width: 100%; height: 330px; object-fit: cover; object-position: center; border-radius: 3px; }
+
+    /* Lower sections give each navigation link a real destination. */
+    .neighborhoods { border-top: 1px solid var(--line); }
+    .neighborhood-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 38px; }
+    .neighborhood { border-top: 1px solid #bfc1b8; padding-top: 24px; }
+    .neighborhood-number { color: #8c7565; font-size: 12px; letter-spacing: 2px; }
+    h3 { margin: 18px 0 12px; font-size: 29px; }
+    .neighborhood p { margin: 0; }
+    .gallery { background: #eaece5; }
+    .gallery-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+    figure { margin: 0; }
+    .gallery-image { overflow: hidden; border-radius: 4px; }
+    .gallery img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      transition: transform .45s ease, filter .45s ease;
+    }
+    figcaption { margin-top: 15px; color: #575e54; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .gallery figcaption { transition: color .3s ease, transform .3s ease; }
+    @media (hover: hover) {
+      .gallery figure:hover img {
+        transform: scale(1.06);
+        filter: grayscale(100%);
+      }
+      .gallery figure:hover figcaption {
+        color: #956347;
+        transform: translateX(4px);
+      }
+    }
+
+    /* Travel planner tables */
+    .planner { border-top: 1px solid var(--line); }
+    .planner-intro { margin: -22px 0 48px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+    .table-scroll { margin-bottom: 78px; overflow-x: auto; }
+    .travel-table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    .travel-table th,
+    .travel-table td {
+      padding: 22px 20px;
+      border: 1px solid #e0e0d9;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .travel-table thead th {
+      color: #fff;
+      background: #24312c;
+      font-size: 13px;
+      letter-spacing: .6px;
+    }
+    .travel-table tbody tr:nth-child(even) td,
+    .travel-table tbody tr:nth-child(even) th {
+      background: #f3f2ee;
+    }
+    .travel-table .row-heading {
+      width: 18%;
+      background: #eeece7;
+      font-weight: 700;
+    }
+    .travel-table .featured {
+      color: #a04747;
+      background: #f5e8e1;
+      font-weight: 700;
+      text-align: center;
+    }
+    .travel-table .category {
+      width: 40%;
+      background: #eeece7;
+      font-weight: 700;
+    }
+    .travel-table .cost {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .budget-title { margin-top: 0; }
+
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 32px; }
+    .footer-inner p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+    .footer-inner a { text-underline-offset: 3px; }
+
+    @media (min-width: 1600px) {
+      .hero { min-height: 680px; }
+    }
+    @media (max-width: 800px) {
+      .container { width: calc(100% - 48px); }
+      .header-inner { min-height: 80px; }
+      .navigation { gap: 17px; }
+      .navigation a { font-size: 9px; letter-spacing: 1px; }
+      .hero { min-height: 550px; }
+      h1 { letter-spacing: -3px; }
+      .section { padding-block: 60px; }
+      .discover-grid { gap: 30px; }
+      .discover-photo { height: 350px; }
+      .neighborhood-grid { gap: 22px; }
+      .gallery img { height: 260px; }
+    }
+    @media (max-width: 600px) {
+      .container { width: calc(100% - 40px); }
+      .header-inner { flex-direction: column; justify-content: center; gap: 10px; padding-block: 20px; }
+      .navigation { gap: 24px; }
+      .hero { min-height: 525px; }
+      .hero-content { padding-block: 58px; }
+      .hero .eyebrow { font-size: 10px; letter-spacing: 1.6px; }
+      h1 { margin-top: 28px; font-size: clamp(57px, 14vw, 80px); letter-spacing: -2.8px; }
+      .hero-description { font-size: 14px; max-width: 330px; }
+      h2 { margin-bottom: 30px; letter-spacing: -1px; }
+      .discover-grid, .neighborhood-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .discover-photo { height: 290px; }
+      .neighborhood-grid { gap: 34px; }
+      .gallery-grid { gap: 30px; }
+      .gallery img { height: 270px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; gap: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .gallery img, .gallery figcaption { transition: none; }
+      .gallery figure:hover img, .gallery figure:hover figcaption { transform: none; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#discover">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Tokyo home">TOKYO.</a>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#discover">DISCOVER</a>
+        <a href="#neighborhoods">NEIGHBORHOODS</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#planner">PLANNER</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1681419972368-c7d8d8184f2c?auto=format&amp;fit=crop&amp;w=2200&amp;q=85" alt="" fetchpriority="high">
+      <div class="container hero-content">
+        <p class="eyebrow">A visual journey through Japan</p>
+        <h1 id="hero-title">A City of<br>Contrasts.</h1>
+        <span class="hero-rule" aria-hidden="true"></span>
+        <p class="hero-description">Quiet temples, electric streets, and little moments in between. Discover a different side of Tokyo.</p>
+      </div>
+    </section>
+
+    <section class="container section" id="discover" aria-labelledby="discover-title">
+      <p class="eyebrow section-label">01 / Discover</p>
+      <h2 id="discover-title">Where tradition meets tomorrow.</h2>
+      <div class="discover-grid">
+        <div class="discover-copy">
+          <p class="eyebrow">More than a destination</p>
+          <div class="body-copy">
+            <p>Tokyo is a city that never stops surprising you. One moment, you are surrounded by bright signs and busy crossings. A few streets away, you might discover a quiet shrine hidden between modern buildings.</p>
+            <p>What makes Tokyo special is the way old and new exist side by side. Every neighborhood has its own rhythm, atmosphere, and story to tell.</p>
+          </div>
+          <blockquote>“The best way to explore Tokyo is to get a little lost.”</blockquote>
+        </div>
+        <img class="discover-photo" src="https://images.unsplash.com/photo-1701839339718-52a8792a2e4e?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="A Tokyo street filled with colorful neon signs and pedestrians" loading="lazy" width="1000" height="750">
+      </div>
+    </section>
+
+    <section class="container section neighborhoods" id="neighborhoods" aria-labelledby="neighborhoods-title">
+      <p class="eyebrow section-label">02 / Neighborhoods</p>
+      <h2 id="neighborhoods-title">One city. Many different worlds.</h2>
+      <div class="neighborhood-grid">
+        <article class="neighborhood">
+          <span class="neighborhood-number">01 — THE ENERGY</span>
+          <h3>Shibuya</h3>
+          <p class="body-copy">Busy crossings, music, and bright shop windows. Follow the movement and discover the city's electric side.</p>
+        </article>
+        <article class="neighborhood">
+          <span class="neighborhood-number">02 — THE TRADITION</span>
+          <h3>Asakusa</h3>
+          <p class="body-copy">Temple streets and small shops invite a slower pace. Take a moment to notice the details of old Tokyo.</p>
+        </article>
+        <article class="neighborhood">
+          <span class="neighborhood-number">03 — THE NIGHT</span>
+          <h3>Shinjuku</h3>
+          <p class="body-copy">Tall buildings give way to little lanes. As evening arrives, signs light up and another side of the city begins.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <p class="eyebrow section-label">03 / Gallery</p>
+        <h2 id="gallery-title">Little moments. Lasting impressions.</h2>
+        <div class="gallery-grid">
+          <figure>
+            <div class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1681419972368-c7d8d8184f2c?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Tokyo's skyline and Tokyo Tower in warm afternoon light" loading="lazy" width="1200" height="800">
+            </div>
+            <figcaption>The city, from a different perspective</figcaption>
+          </figure>
+          <figure>
+            <div class="gallery-image">
+            <img src="https://images.unsplash.com/photo-1544885935-98dd03b09034?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="Vehicles and illuminated signs on a Tokyo street at night" loading="lazy" width="1000" height="800">
+            </div>
+            <figcaption>After dark, a different kind of light</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section planner" id="planner" aria-labelledby="planner-title">
+      <p class="eyebrow section-label">04 / Travel Planner</p>
+      <h2 id="planner-title">Three Days in Tokyo.</h2>
+      <p class="planner-intro">Plan your mornings, afternoons, and evenings with this simple three-day itinerary.</p>
+
+      <div class="table-scroll">
+        <table class="travel-table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Morning</th>
+              <th scope="col">Afternoon</th>
+              <th scope="col">Evening</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="row-heading" scope="row">Day 1</th>
+              <td>Asakusa Temple</td>
+              <td>Ueno Park</td>
+              <td>Shibuya</td>
+            </tr>
+            <tr>
+              <th class="row-heading" scope="row">Day 2</th>
+              <td>Meiji Shrine</td>
+              <td>Harajuku</td>
+              <td>Shinjuku</td>
+            </tr>
+            <tr>
+              <th class="row-heading" scope="row">Day 3</th>
+              <td class="featured" colspan="2">Tokyo DisneySea</td>
+              <td>Odaiba</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="budget-title">Travel Budget</h2>
+      <p class="planner-intro">A sample budget for transportation and meals in Tokyo.</p>
+
+      <div class="table-scroll">
+        <table class="travel-table">
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              <th scope="col">Item</th>
+              <th scope="col">Estimated Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="category" scope="rowgroup" rowspan="2">Transportation</th>
+              <td>Metro</td>
+              <td class="cost">&yen;1,000</td>
+            </tr>
+            <tr>
+              <td>Train</td>
+              <td class="cost">&yen;1,500</td>
+            </tr>
+            <tr>
+              <th class="category" scope="rowgroup" rowspan="2">Food</th>
+              <td>Lunch</td>
+              <td class="cost">&yen;1,200</td>
+            </tr>
+            <tr>
+              <td>Dinner</td>
+              <td class="cost">&yen;2,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#top">TOKYO.</a>
+      <p>A visual journey through Japan · Web programming practice<br>
+        Photography: <a href="https://unsplash.com/photos/Sn2Hq_i8cm8">skyline</a>,
+        <a href="https://unsplash.com/photos/QX9kO8vO35Q">neon street</a>,
+        <a href="https://unsplash.com/photos/4CMq1GxDSPA">night scene</a> / Unsplash
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

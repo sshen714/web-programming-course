@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>九九乘法表</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .table-container { overflow-x: auto; }
+    table { border-collapse: collapse; }
+    td { border: 1px solid #ccc; padding: 12px 16px; text-align: center; white-space: nowrap; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h1 id="table-title">Multiplication Table</h1>
+  <div class="table-container">
+    <table id="demo" aria-labelledby="table-title"></table>
+  </div>
+
+  <script>
+    let table = "";
+
+    for (let i = 1; i <= 9; i++) {
+      table += "<tr>";
+
+      for (let j = 2; j <= 9; j++) {
+        table += "<td>" + j + " × " + i + " = " + (j * i) + "</td>";
+      }
+
+      table += "</tr>";
+    }
+
+    document.getElementById("demo").innerHTML = table;
+  </script>
+</body>
+</html>

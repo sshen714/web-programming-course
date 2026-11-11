@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>今天吃什麼？</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,11 +20,24 @@
 
   <main>
     <h2>今天不知道吃什麼嗎？</h2>
-    <p>按下輪盤按鈕，幫你選出今天的用餐主題。</p>
+    <p>先選擇一個主題，再讓輪盤幫你決定今天吃什麼。</p>
 
-    <div class="wheel-placeholder">早餐・午餐・晚餐・飲料</div>
-    <button type="button" id="spin-button">開始選擇</button>
-    <p id="result">選擇結果會顯示在這裡</p>
+    <div class="topic-selector">
+      <label for="topic">選擇主題：</label>
+      <select id="topic">
+        <option value="breakfast">早餐</option>
+        <option value="lunch">午餐</option>
+        <option value="dinner">晚餐</option>
+        <option value="drinks">飲料</option>
+      </select>
+    </div>
+
+    <div class="wheel-placeholder" id="wheel">
+      <ul id="menu-list"></ul>
+    </div>
+
+    <button type="button" id="spin-button">幫我選</button>
+    <p id="result" aria-live="polite">選擇結果會顯示在這裡</p>
   </main>
 
   <footer>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .canvas-box {
+      width: 520px;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #777777;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Canvas Example</h1>
+
+  <div class="canvas-box">
+    <p>Click the canvas to add text.</p>
+    <canvas id="myCanvas" width="500" height="300">
+      Your browser does not support canvas.
+    </canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const context = canvas.getContext("2d");
+
+    context.fillStyle = "royalblue";
+    context.fillRect(80, 140, 230, 90);
+
+    context.fillStyle = "purple";
+    context.fillRect(50, 95, 180, 85);
+
+    context.fillStyle = "red";
+    context.fillRect(20, 50, 140, 75);
+
+    canvas.addEventListener("click", function (event) {
+      const canvasPosition = canvas.getBoundingClientRect();
+      const x = event.clientX - canvasPosition.left;
+      const y = event.clientY - canvasPosition.top;
+
+      context.fillStyle = "black";
+      context.font = "20px Arial";
+      context.fillText("Hello!", x, y);
+    });
+  </script>
+</body>
+</html>

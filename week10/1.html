@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JavaScript Practice</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      margin: 40px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .card {
+      width: 280px;
+      padding: 20px;
+      border: 1px dashed #999999;
+    }
+
+    .message {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .photo {
+      width: 250px;
+      height: 200px;
+      object-fit: cover;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Task</h1>
+
+  <div class="container">
+    <div class="card">
+      <h2>Hello!</h2>
+      <p class="message" id="message1">Nice to meet you!</p>
+      <img class="photo" id="photo1" src="../week5/quokka.png" alt="A smiling quokka">
+      <br>
+      <button onclick="addBorder('photo1')">Add Border</button>
+      <button onclick="changeColor('message1')">Change Color</button>
+    </div>
+
+    
+
+  <script>
+    function addBorder(photoId) {
+      document.getElementById(photoId).style.border = "5px solid black";
+    }
+
+    function changeColor(messageId) {
+      document.getElementById(messageId).style.color = "blue";
+    }
+  </script>
+</body>
+</html>

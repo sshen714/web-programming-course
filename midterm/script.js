@@ -9,6 +9,7 @@ const topic = document.getElementById("topic");
 const menuList = document.getElementById("menu-list");
 const spinButton = document.getElementById("spin-button");
 const result = document.getElementById("result");
+const wheel = document.getElementById("wheel");
 
 function showMenu() {
   const selectedMenu = menus[topic.value];
@@ -26,7 +27,18 @@ function showMenu() {
 function chooseFood() {
   const selectedMenu = menus[topic.value];
   const randomNumber = Math.floor(Math.random() * selectedMenu.length);
-  result.textContent = "今天就選：" + selectedMenu[randomNumber];
+
+  wheel.classList.add("spinning");
+  spinButton.disabled = true;
+  topic.disabled = true;
+  result.textContent = "輪盤旋轉中...";
+
+  setTimeout(function () {
+    wheel.classList.remove("spinning");
+    spinButton.disabled = false;
+    topic.disabled = false;
+    result.textContent = "今天就選：" + selectedMenu[randomNumber];
+  }, 2000);
 }
 
 topic.addEventListener("change", showMenu);

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arc Study</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      background-color: #e8edf3;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: auto;
+      background-color: #f7f4ed;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="arcCanvas" width="800" height="700"></canvas>
+
+  <script>
+    const canvas = document.getElementById("arcCanvas");
+    const context = canvas.getContext("2d");
+
+    const navy = "#263b5a";
+    const blue = "#4f86a6";
+    const purple = "#5c4b8a";
+    const coral = "#dc6f61";
+    const orange = "#ed9b40";
+    const teal = "#3c8074";
+    const cream = "#f6e8c8";
+
+    // Title
+    context.fillStyle = navy;
+    context.font = "bold 15px Arial";
+    context.fillText("SHAPE / COLOUR / ANGLE", 40, 30);
+    context.font = "bold 48px Arial";
+    context.fillText("ARC STUDY", 40, 85);
+    context.font = "18px Arial";
+    context.fillText("The same circle can create different shapes.", 40, 115);
+
+    // 2 x 2 panel backgrounds
+    context.fillStyle = "#dceaf7";
+    context.fillRect(40, 140, 360, 240);
+    context.fillStyle = purple;
+    context.fillRect(400, 140, 360, 240);
+    context.fillStyle = "#cfe8df";
+    context.fillRect(40, 380, 360, 240);
+    context.fillStyle = "#f6d6a8";
+    context.fillRect(400, 380, 360, 240);
+
+    // 01: Open arcs
+    context.strokeStyle = blue;
+    context.lineWidth = 22;
+    context.beginPath();
+    context.arc(220, 275, 100, Math.PI * 1.15, Math.PI * 1.85);
+    context.stroke();
+
+    context.strokeStyle = coral;
+    context.lineWidth = 14;
+    context.beginPath();
+    context.arc(220, 285, 60, Math.PI * 1.15, Math.PI * 1.85);
+    context.stroke();
+
+    // 02: Three-quarter circle
+    context.fillStyle = cream;
+    context.beginPath();
+    context.moveTo(580, 255);
+    context.arc(580, 255, 88, 0, Math.PI * 1.5);
+    context.closePath();
+    context.fill();
+
+    context.fillStyle = orange;
+    context.beginPath();
+    context.moveTo(605, 235);
+    context.arc(605, 235, 58, Math.PI * 1.5, Math.PI * 2);
+    context.closePath();
+    context.fill();
+
+    // 03: Two quarter-circle sectors
+    context.fillStyle = teal;
+    context.beginPath();
+    context.moveTo(95, 425);
+    context.arc(95, 425, 135, 0, Math.PI / 2);
+    context.closePath();
+    context.fill();
+
+    context.fillStyle = orange;
+    context.beginPath();
+    context.moveTo(335, 555);
+    context.arc(335, 555, 55, Math.PI, Math.PI * 1.5);
+    context.closePath();
+    context.fill();
+
+    // 04: Half circle
+    context.fillStyle = navy;
+    context.beginPath();
+    context.moveTo(470, 545);
+    context.arc(580, 545, 110, Math.PI, Math.PI * 2);
+    context.closePath();
+    context.fill();
+
+    context.strokeStyle = coral;
+    context.lineWidth = 3;
+    context.beginPath();
+    context.moveTo(470, 565);
+    context.lineTo(690, 565);
+    context.stroke();
+
+    // Labels
+    context.font = "bold 13px Arial";
+    context.fillStyle = navy;
+    context.fillText("01 / OPEN ARCS / 120°", 60, 360);
+    context.fillStyle = cream;
+    context.fillText("02 / THREE QUARTERS / 270°", 420, 360);
+    context.fillStyle = navy;
+    context.fillText("03 / QUARTER SECTORS / 90°", 60, 600);
+    context.fillStyle = navy;
+    context.fillText("04 / HALF CIRCLE / 180°", 420, 600);
+
+    // Footer
+    context.fillStyle = navy;
+    context.font = "bold 16px Arial";
+    context.fillText("CANVAS ARC PRACTICE", 40, 660);
+    context.font = "14px Arial";
+    context.fillText("beginPath()  /  arc()  /  fill()  /  stroke()", 40, 685);
+  </script>
+</body>
+</html>

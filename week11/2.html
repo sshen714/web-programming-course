@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Example 03</title>
+
+  <style>
+    body {
+      margin: 40px;
+      font-family: Arial, sans-serif;
+    }
+
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Canvas Circle</h1>
+
+  <input type="button" value="Draw Circle" onclick="drawCircle()">
+  <br>
+  <canvas id="myCanvas" width="400" height="200"></canvas>
+
+  <script>
+    function drawCircle() {
+      const canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+
+      context.strokeStyle = "#376b4d";
+      context.lineWidth = 10;
+
+      const gradient = context.createLinearGradient(0, 0, 200, 0);
+      gradient.addColorStop(0, "#376b4d");
+      gradient.addColorStop(1, "#fcba03");
+      context.fillStyle = gradient;
+
+      context.beginPath();
+      context.arc(100, 100, 50, 0, Math.PI * 2, true);
+      context.fill();
+      context.stroke();
+
+      context.font = "30px Arial";
+      context.fillStyle = "#ffffff";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText("Hi", 100, 100);
+    }
+  </script>
+</body>
+</html>

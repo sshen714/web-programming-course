@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Example 02</title>
+
+  <style>
+    body {
+      margin: 40px;
+      font-family: Arial, sans-serif;
+    }
+
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Canvas Line</h1>
+
+  <input type="button" value="draw line" onclick="drawLine()">
+  <br>
+  <canvas id="myCanvas" width="400" height="200"></canvas>
+
+  <script>
+    function drawLine() {
+      const canvas = document.getElementById("myCanvas");
+      const context = canvas.getContext("2d");
+
+      context.strokeStyle = "#ff0066";
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(50, 50);
+      context.lineTo(150, 50);
+      context.lineTo(200, 100);
+      context.lineTo(350, 100);
+      context.stroke();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arc Study Buttons</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #e8edf3;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 9px 16px;
+      border: 0;
+      border-radius: 5px;
+      color: white;
+      background-color: #263b5a;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4f86a6;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin: auto;
+      border: 2px solid #263b5a;
+      background-color: #f7f4ed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Canvas Arc Buttons</h1>
+  <p>Click a button to draw a shape.</p>
+
+  <div class="buttons">
+    <button onclick="drawOpenArcs()">Open Arcs</button>
+    <button onclick="drawThreeQuarters()">Three Quarters</button>
+    <button onclick="drawQuarterSectors()">Quarter Sectors</button>
+    <button onclick="drawHalfCircle()">Half Circle</button>
+  </div>
+
+  <canvas id="arcCanvas" width="600" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("arcCanvas");
+    const context = canvas.getContext("2d");
+
+    const navy = "#263b5a";
+    const blue = "#4f86a6";
+    const purple = "#5c4b8a";
+    const coral = "#dc6f61";
+    const orange = "#ed9b40";
+    const teal = "#3c8074";
+    function clearCanvas(title) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.textAlign = "center";
+      context.fillStyle = navy;
+      context.font = "bold 24px Arial";
+      context.fillText(title, 300, 45);
+      context.font = "14px Arial";
+      context.fillText("Click another button to change the shape.", 300, 375);
+    }
+
+    function drawOpenArcs() {
+      clearCanvas("OPEN ARCS / 120°");
+
+      context.strokeStyle = blue;
+      context.lineWidth = 22;
+      context.beginPath();
+      context.arc(300, 240, 120, Math.PI * 1.15, Math.PI * 1.85);
+      context.stroke();
+
+      context.strokeStyle = coral;
+      context.lineWidth = 14;
+      context.beginPath();
+      context.arc(300, 250, 72, Math.PI * 1.15, Math.PI * 1.85);
+      context.stroke();
+    }
+
+    function drawThreeQuarters() {
+      clearCanvas("THREE QUARTERS / 270°");
+
+      context.fillStyle = purple;
+      context.beginPath();
+      context.moveTo(300, 210);
+      context.arc(300, 210, 110, 0, Math.PI * 1.5);
+      context.closePath();
+      context.fill();
+
+      context.fillStyle = orange;
+      context.beginPath();
+      context.moveTo(325, 210);
+      context.arc(325, 210, 72, Math.PI * 1.5, Math.PI * 2);
+      context.closePath();
+      context.fill();
+    }
+
+    function drawQuarterSectors() {
+      clearCanvas("QUARTER SECTORS / 90°");
+
+      context.fillStyle = teal;
+      context.beginPath();
+      context.moveTo(210, 130);
+      context.arc(210, 130, 125, 0, Math.PI / 2);
+      context.closePath();
+      context.fill();
+
+      context.fillStyle = orange;
+      context.beginPath();
+      context.moveTo(420, 310);
+      context.arc(420, 310, 70, Math.PI, Math.PI * 1.5);
+      context.closePath();
+      context.fill();
+    }
+
+    function drawHalfCircle() {
+      clearCanvas("HALF CIRCLE / 180°");
+
+      context.fillStyle = navy;
+      context.beginPath();
+      context.moveTo(170, 260);
+      context.arc(300, 260, 130, Math.PI, Math.PI * 2);
+      context.closePath();
+      context.fill();
+
+      context.strokeStyle = coral;
+      context.lineWidth = 3;
+      context.beginPath();
+      context.moveTo(170, 285);
+      context.lineTo(430, 285);
+      context.stroke();
+    }
+
+    clearCanvas("CHOOSE A SHAPE");
+  </script>
+</body>
+</html>

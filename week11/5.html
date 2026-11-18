@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Night Dial</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      color: #f6e7c8;
+      background-color: #101b31;
+    }
+
+    .page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 55px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .clock-area {
+      text-align: center;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+    }
+
+    .digital-time {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 18px;
+      border: 1px solid #e7a66a;
+      font-size: 22px;
+      letter-spacing: 2px;
+    }
+
+    .information {
+      max-width: 330px;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+      font-family: Georgia, serif;
+      font-size: 58px;
+      color: #f4c58d;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      color: #9cb3d2;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-family: Georgia, serif;
+      color: #f4c58d;
+    }
+
+    li {
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 850px) {
+      .page {
+        flex-direction: column;
+      }
+
+      .information {
+        max-width: 520px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="clock-area">
+      <canvas id="clock" width="520" height="520">
+        Sorry, your browser does not support canvas.
+      </canvas>
+      <div class="digital-time" id="digitalTime">00:00:00</div>
+    </div>
+
+    <div class="information">
+      <h1>Night Dial</h1>
+      <p class="subtitle">A live analog clock drawn with HTML Canvas.</p>
+
+      <h2>Canvas Exercise</h2>
+      <ol>
+        <li>Draw a circular clock face with a radial gradient.</li>
+        <li>Create 60 tick marks and emphasize every fifth mark.</li>
+        <li>Add Roman numerals at the four quarter hours.</li>
+        <li>Update the hour, minute and second hands every second.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("clock");
+    const context = canvas.getContext("2d");
+    const digitalTime = document.getElementById("digitalTime");
+    const center = canvas.width / 2;
+    const radius = 225;
+
+    context.translate(center, center);
+
+    function drawClock() {
+      context.clearRect(-center, -center, canvas.width, canvas.height);
+      drawFace();
+      drawTicks(); 
+      drawRomanNumbers();
+      drawHands();
+      updateDigitalTime();
+    }
+
+    function drawFace() {
+      const gradient = context.createRadialGradient(0, 0, 20, 0, 0, radius);
+      gradient.addColorStop(0, "#243b63");
+      gradient.addColorStop(0.75, "#142744");
+      gradient.addColorStop(1, "#0b172b");
+
+      context.beginPath();
+      context.arc(0, 0, radius, 0, Math.PI * 2);
+      context.fillStyle = gradient;
+      context.fill();
+
+      context.lineWidth = 10;
+      context.strokeStyle = "#e7a66a";
+      context.stroke();
+
+      context.beginPath();
+      context.arc(0, 0, radius - 22, 0, Math.PI * 2);
+      context.lineWidth = 2;
+      context.strokeStyle = "#6d87aa";
+      context.stroke();
+    }
+
+    function drawTicks() {
+      for (let i = 0; i < 60; i++) {
+        const angle = i * Math.PI / 30;
+        const isHourMark = i % 5 === 0;
+        const outer = radius - 14;
+        const inner = isHourMark ? radius - 40 : radius - 27;
+
+        context.beginPath();
+        context.moveTo(Math.sin(angle) * inner, -Math.cos(angle) * inner);
+        context.lineTo(Math.sin(angle) * outer, -Math.cos(angle) * outer);
+        context.lineWidth = isHourMark ? 5 : 2;
+        context.strokeStyle = isHourMark ? "#f4c58d" : "#91a8c6";
+        context.stroke();
+      }
+    }
+
+    function drawRomanNumbers() {
+      const numbers = [
+        { text: "XII", x: 0, y: -155 },
+        { text: "III", x: 155, y: 8 },
+        { text: "VI", x: 0, y: 170 },
+        { text: "IX", x: -155, y: 8 }
+      ];
+
+      context.fillStyle = "#f6e7c8";
+      context.font = "bold 30px Georgia";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+
+      for (let i = 0; i < numbers.length; i++) {
+        context.fillText(numbers[i].text, numbers[i].x, numbers[i].y);
+      }
+    }
+
+    function drawHands() {
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes() + seconds / 60;
+      const hours = (now.getHours() % 12) + minutes / 60;
+
+      drawHourHand(hours * Math.PI / 6, radius * 0.50);
+      drawMinuteHand(minutes * Math.PI / 30, radius * 0.72);
+      drawSecondHand(seconds * Math.PI / 30, radius * 0.82);
+
+      context.beginPath();
+      context.arc(0, 0, 10, 0, Math.PI * 2);
+      context.fillStyle = "#101b31";
+      context.fill();
+      context.lineWidth = 4;
+      context.strokeStyle = "#f4c58d";
+      context.stroke();
+    }
+
+    function drawHourHand(angle, length) {
+      context.save();
+      context.rotate(angle);
+      context.beginPath();
+      context.moveTo(0, 18);
+      context.lineTo(-11, -length * 0.35);
+      context.lineTo(-7, -length * 0.78);
+      context.lineTo(0, -length);
+      context.lineTo(7, -length * 0.78);
+      context.lineTo(11, -length * 0.35);
+      context.closePath();
+      context.fillStyle = "#e7a66a";
+      context.fill();
+      context.restore();
+    }
+
+    function drawMinuteHand(angle, length) {
+      context.save();
+      context.rotate(angle);
+      context.beginPath();
+      context.moveTo(0, 24);
+      context.lineTo(-6, -length * 0.30);
+      context.lineTo(-3, -length * 0.88);
+      context.lineTo(0, -length);
+      context.lineTo(3, -length * 0.88);
+      context.lineTo(6, -length * 0.30);
+      context.closePath();
+      context.fillStyle = "#f6e7c8";
+      context.fill();
+      context.restore();
+    }
+
+    function drawSecondHand(angle, length) {
+      context.save();
+      context.rotate(angle);
+
+      context.beginPath();
+      context.moveTo(0, 42);
+      context.lineTo(0, -length);
+      context.lineWidth = 2;
+      context.lineCap = "round";
+      context.strokeStyle = "#ef767a";
+      context.stroke();
+
+      context.beginPath();
+      context.arc(0, 36, 7, 0, Math.PI * 2);
+      context.fillStyle = "#101b31";
+      context.fill();
+      context.lineWidth = 3;
+      context.strokeStyle = "#ef767a";
+      context.stroke();
+
+      context.restore();
+    }
+
+    function updateDigitalTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+      digitalTime.textContent = hours + ":" + minutes + ":" + seconds;
+    }
+
+    drawClock();
+    setInterval(drawClock, 1000);
+  </script>
+</body>
+</html>

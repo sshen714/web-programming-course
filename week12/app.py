@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    name = "Shen"
+    name = "wei"
     department = "學生"
     introduction = "我正在學習網頁程式設計，希望能做出簡單又實用的網站。"
     interests = ["網頁設計", "程式設計", "音樂"]

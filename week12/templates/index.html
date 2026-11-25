@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ name }} 的個人簡介</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="profile">
+    <header>
+      <div class="avatar">{{ name[0] }}</div>
+      <div>
+        <p class="label">PERSONAL PROFILE</p>
+        <h1>{{ name }}</h1>
+        <p class="department">{{ department }}</p>
+      </div>
+    </header>
+
+    <section>
+      <h2>關於我</h2>
+      <p>{{ introduction }}</p>
+    </section>
+
+    <section>
+      <h2>我的興趣</h2>
+      <ul>
+        {% for interest in interests %}
+          <li>{{ interest }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h2>正在學習</h2>
+      <ol>
+        {% for course in courses %}
+          <li>{{ course }}</li>
+        {% endfor %}
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
